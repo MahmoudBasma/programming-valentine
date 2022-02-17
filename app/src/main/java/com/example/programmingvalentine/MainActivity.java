@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String lang;
         res = findViewById(R.id.results);
 
-        for(int i = 0; i < 9; i++){
+        for(int i = 1; i < 9; i++){
             lang = parent.getItemAtPosition(i).toString();
             if(checked[i] && percentages[i]!= 0) text.append("love result of \t\t"+ lang + "\t\t is: " + percentages[i] + "\n");
         }
