@@ -36,16 +36,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
         name = findViewById(R.id.name);
-        res = findViewById(R.id.results);
         imgView = findViewById(R.id.imageView);
 
 
         String lang = parent.getItemAtPosition(position).toString();
         lang = lang.toLowerCase();
+        percentages[position] = rand.nextInt(100);
+        checked[position] = true;
 
         if(lang.equals("java")){
             imgView.setImageResource(R.drawable.java);
-            percentages[position] = rand.nextInt(100);
         }
         else if(lang.equals("javascript")){
             imgView.setImageResource(R.drawable.javascript);
@@ -80,12 +80,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void fillTable(AdapterView parent, int[] percentages){
-        StringBuilder text = new StringBuilder("loading result ...");
+        StringBuilder text = new StringBuilder();
         String lang;
+        res = findViewById(R.id.results);
+
         for(int i = 0; i < 9; i++){
             lang = parent.getItemAtPosition(i).toString();
-            if(checked[i] && percentages[i]!= 0) text.append("love result of "+ lang + "\t\t\t\t is: " + percentages[i]);
+            if(checked[i] && percentages[i]!= 0) text.append("love result of \t\t"+ lang + "\t\t is: " + percentages[i] + "\n");
         }
-        res.setText(text);
+        res.setText(text.toString());
     }
 }
