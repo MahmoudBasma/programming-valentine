@@ -18,7 +18,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Spinner spinner;
     ImageView imgView = null;
     TextView name, res;
+    int[] percentages = new int[9];
     boolean checked[] = new boolean[9];
+    Random rand = new Random();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +39,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         res = findViewById(R.id.results);
         imgView = findViewById(R.id.imageView);
 
+
         String lang = parent.getItemAtPosition(position).toString();
         lang = lang.toLowerCase();
 
         if(lang.equals("java")){
             imgView.setImageResource(R.drawable.java);
+            percentages[0] = rand.nextInt(100);
         }
         else if(lang.equals("javascript")){
             imgView.setImageResource(R.drawable.javascript);
@@ -66,18 +71,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         else if(lang.equals("c#")){
             imgView.setImageResource(R.drawable.csharp);
         }
-
-        //res.setText(res.getText() + " " + lang);
-
+        fillTable(parent, percentages);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 //for nothing
+    }
 
-
-
-
-
+    public void fillTable(AdapterView parent, int[] percentages){
+        StringBuilder text = new StringBuilder("loading result ...");
+        String lang;
+        res.setText(text);
+        for(int i = 0; i < 9; i++){
+            lang = parent.getItemAtPosition(i).toString();
+            if(checked[i] && percentages[i]!= 0) text.append("love result of "+ lang + "\t\t\t\t is: " + percentages[i]);
+        }
     }
 }
