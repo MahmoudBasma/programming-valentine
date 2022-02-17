@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         if(lang.equals("java")){
             imgView.setImageResource(R.drawable.java);
-            percentages[0] = rand.nextInt(100);
+            percentages[position] = rand.nextInt(100);
         }
         else if(lang.equals("javascript")){
             imgView.setImageResource(R.drawable.javascript);
@@ -82,10 +82,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void fillTable(AdapterView parent, int[] percentages){
         StringBuilder text = new StringBuilder("loading result ...");
         String lang;
-        res.setText(text);
         for(int i = 0; i < 9; i++){
             lang = parent.getItemAtPosition(i).toString();
             if(checked[i] && percentages[i]!= 0) text.append("love result of "+ lang + "\t\t\t\t is: " + percentages[i]);
         }
+        res.setText(text);
     }
 }
