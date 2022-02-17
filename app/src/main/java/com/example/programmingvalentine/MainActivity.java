@@ -11,58 +11,63 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
     ImageView imgView = null;
     TextView name, res;
-
+    boolean checked[] = new boolean[9];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         spinner = findViewById(R.id.dropList);
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.langs, R.layout.support_simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
-
-
 
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
         name = findViewById(R.id.name);
         res = findViewById(R.id.results);
+        imgView = findViewById(R.id.imageView);
 
-        if (imgView != null){
-            imgView.setImageResource(0);
-        }
         String lang = parent.getItemAtPosition(position).toString();
-        switch (lang){
-            case "Java":
-                imgView.setImageResource(R.drawable.java);
-            case "Python":
-                imgView.setImageResource(R.drawable.python);
-            case "PHP":
-                imgView.setImageResource(R.drawable.php);
-            case "JavaScript":
-                imgView.setImageResource(R.drawable.javascript);
-            case "GO":
-                imgView.setImageResource(R.drawable.go);
-            case "Ruby":
-                imgView.setImageResource(R.drawable.ruby);
-            case "C++":
-                imgView.setImageResource(R.drawable.cplusplus);
-            case "C#":
-                imgView.setImageResource(R.drawable.csharp);
+        lang = lang.toLowerCase();
+
+        if(lang.equals("java")){
+            imgView.setImageResource(R.drawable.java);
+        }
+        else if(lang.equals("javascript")){
+            imgView.setImageResource(R.drawable.javascript);
+        }
+        else if(lang.equals("sql")){
+            imgView.setImageResource(R.drawable.sql);
+        }
+        else if(lang.equals("python")){
+            imgView.setImageResource(R.drawable.python);
+        }
+        else if(lang.equals("ruby")){
+            imgView.setImageResource(R.drawable.ruby);
+        }
+        else if(lang.equals("go")){
+            imgView.setImageResource(R.drawable.go);
+        }
+        else if(lang.equals("php")){
+            imgView.setImageResource(R.drawable.php);
+        }
+        else if(lang.equals("c++")){
+            imgView.setImageResource(R.drawable.cplusplus);
+        }
+        else if(lang.equals("c#")){
+            imgView.setImageResource(R.drawable.csharp);
         }
 
-        res.setText("Waiting for love results ...");
+        //res.setText(res.getText() + " " + lang);
 
     }
 
